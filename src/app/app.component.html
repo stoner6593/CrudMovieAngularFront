@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="envelope"></mdb-icon> Contact<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon> Settings</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+<div class="container">
+
+  <button type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#basicExample"
+  (click)="openModal(modal,1,1,'')"  mdbWavesEffect>Agregar</button>
+
+
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="md-form">
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          class="form-control"
+          id="search"
+          mdbInput
+        />
+        <label for="search">Buscar</label>
+      </div>
+    </div>
+  </div>
+  <table mdbTable class="z-depth-1">
+    <thead>
+      <tr>
+        <th
+          *ngFor="let head of headElements; let i = index"
+          scope="col"
+        >
+          {{head}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let el of elements; let i = index">
+        <th scope="row">{{el.id}}</th>
+        <td class="red-text">{{el.title}}</td>
+        <td>{{el.description}}</td>
+        <td>
+          <button
+                  
+                *ngIf="!el.deleted_at"
+                type="button"
+                (click)="openModal(modal,1,2,el)"
+                class="btn btn-sm"
+                mdbBtn color="info"
+                >Editar</button>
+
+          <button
+                  *ngIf="!el.deleted_at"
+                  type="button"
+                  (click)="eliminar(el)"
+                   mdbBtn color="warning"
+                   class="btn btn-sm"
+                > Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  
+
+<ng-template #modal let-c="close" let-d="dismiss" >
+  <app-modal [title]="show==1 ? 'Registro de Pelicula' : 'Editar Pelicula'" [c]="c" [d]="d">      
+  
+    <app-form [tipo]="show" [id]="id"  ></app-form>
+    <!--<app-categorias-edit  *ngIf="show=='2'" [id]="id"  ></app-categorias-edit>-->
+  </app-modal>
+</ng-template>
+
+</body>
+</html>
+

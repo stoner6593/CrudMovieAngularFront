@@ -1,0 +1,23 @@
+
+ <form id="validatingForm" [formGroup]="validatingForm" (ngSubmit)="submit()">
+
+    <input type="hidden"  formControlName="id" readonly class="form-control" id="id" name="id"  >
+     <div class="md-form mb-5">
+       <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+       <input type="text" id="title" name="title" class="form-control" formControlName="title"
+             mdbInput mdbValidate>
+       <label for="defaultForm-email">Título</label>
+     </div>
+
+     <div class="md-form mb-4">
+       <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+       <input type="text" id="description" name="description" class="form-control" formControlName="description"
+             mdbInput mdbValidate>
+       <label for="defaultForm-email">Descripción</label>
+     </div>
+
+  
+   <div class="modal-footer d-flex justify-content-center">
+     <button mdbBtn type="submit" color="default" class="waves-light" mdbWavesEffect>Guardar</button>
+   </div>
+ </form>
